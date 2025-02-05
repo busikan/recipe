@@ -112,6 +112,10 @@ Add support for multiple languages in the interface.
 Provide more customization options for recipes (e.g., serving size, cuisine type).
 Improve ingredient detection using additional image processing libraries.
 
+## Tips
+We have added some filters in the script2 file. You can try to connect this file if you want to filter out some less accurate or standardized recognition results.
+
+
 
 
 
