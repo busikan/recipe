@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Food Recognition</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <header class="hero">
+    <img src="{{ url_for('static', filename='image/food-icon.jpg') }}" alt="Food Icon" class="header-icon">
+    <h1>🍴 Discover Your Next Meal with Food Genie 🍴</h1>
+    <p>Upload an image, automatically generate ingredients, and get amazing recipes instantly!</p>
+    <button class="upload-button" id="uploadButton">Upload Image</button>
+    <input type="file" id="fileInput" accept="image/*" style="display: none;">
+  </header>
+
+  <section id="imagePreview" class="image-preview">
+    <p>No image uploaded yet</p>
+  </section>
+
+
+<!-- Recognized Ingredients Modal -->
+<section id="ingredientsModal" class="modal" style="display: none;">
+  <div class="modal-content">
+      <span class="close-button" onclick="closeIngredientsModalAndOpenPreferences()">&times;</span>
+      <h3>Recognized Ingredients</h3>
+      <p id="recognizedIngredientsList"></p>
+      <button class="confirm-button" onclick="closeIngredientsModalAndOpenPreferences()">Continue</button>
+  </div>
+</section>
+
+<!-- Preferences Modal -->
+<div id="preferencesModal" class="modal" style="display: none;">
+  <div class="modal-content">
+    <span class="close-button" onclick="closePreferencesModal()">&times;</span>
+    <h3>Customize Your Recipes</h3>
+    <p>Enter your taste preferences or dietary restrictions:</p>
+    <textarea id="preferencesInput" rows="4" placeholder="e.g., spicy, vegan, low-carb"></textarea>
+    <button class="confirm-button" onclick="sendToGPT()">Submit</button>
+    <button class="cancel-button" onclick="closePreferencesModal()">Cancel</button>
+  </div>
+</div>
+
+<!-- 生成菜谱弹窗 -->
+<div id="recipeModal" class="modal" style="display: none;">
+  <div class="modal-content">
+    <span class="close-button" onclick="closeRecipeModal()">&times;</span>
+    <h3>Generated Recipes</h3>
+    <div id="modalContent">
+      <!-- 菜谱内容将插入到这里 -->
+    </div>
+    <div class="modal-buttons">
+      <button id="tryAgainButton" class="modal-button confirm-button" onclick="tryAgain()">Try Again</button>
+      <button id="likeItButton" class="modal-button confirm-button" onclick="showGutenAppetit()">I Like It</button>
+    </div>
+  </div>
+</div>
+
+  <!-- 显示 "Try Again" 和 "I Like It" 按钮的区域 -->
+  <section id="recognitionResult" style="display: felx;"></section>
+
+  <footer>
+      <!-- 展示菜品卡片 -->
+    <section class="cards-container">
+      <div class="card">
+        <img src="https://img1.baidu.com/it/u=2365693000,2036271668&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500" alt="Dish 1">
+        <h2 class="card-title">Fried Chicken</h2>
+        <p class="card-text">Juicy and tender fried chicken with paprika and garlic seasoning.</p>
+      </div>
+      <div class="card">
+        <img src="https://img1.baidu.com/it/u=209964968,1591923255&fm=253&fmt=auto&app=138&f=JPEG?w=889&h=500" alt="Dish 2">
+        <h2 class="card-title">Healthy Fruit Salad</h2>
+        <p class="card-text">Fresh veggies and fruits for a vibrant and colourful meal.</p>
+      </div>
+      <div class="card">
+        <img src="https://img1.baidu.com/it/u=3456025432,1633964097&fm=253&fmt=auto&app=120&f=JPEG?w=800&h=1200" alt="Dish 3">
+        <h2 class="card-title">Vegan Pasta</h2>
+        <p class="card-text">Rich and flavourful pasta loved by all.</p>
+      </div>
+    </section>
+    <p>&copy; 2025 Food Genie | All Rights Reserved</p>
+  </footer>
+
+  <!-- 引用外部 JS 文件 -->
+  <script src="{{ url_for('static', filename='script.js') }}" defer></script>
+</body>
+</html>
