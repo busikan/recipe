@@ -133,12 +133,29 @@ def generate_recipe():
 
         # 提取 GPT 返回的内容
         recipes = response['choices'][0]['message']['content'].strip()
-        print(f"Generated Recipes: {recipes}")
 
-        return jsonify({"recipes": recipes})
+        # Content Filtering
+        if is_food_related(recipes):
+            print(f"Generated Recipes: {recipes}")
+            return jsonify({"recipes": recipes})
+        else:
+            print("Content does not appear to be food-related.")
+            return jsonify({"error": "The generated content is not food-related"}), 400
+
     except Exception as e:
         print(f"Error during recipe generation: {e}")
         return jsonify({"error": "Failed to generate recipes"}), 500
+
+def is_food_related(content):
+    """
+    Check if the content is related to food or cuisines.
+    """
+    food_keywords = [
+        "recipe", "dish", "ingredient", "cuisine", "cook", "bake", "grill", "saute",
+        "meal", "snack", "dessert", "soup", "salad", "pasta", "spice", "flavor"
+    ]
+    # Check if any keyword is present in the content
+    return any(keyword.lower() in content.lower() for keyword in food_keywords)
 
 if __name__ == '__main__':
     app.run(debug=True)
