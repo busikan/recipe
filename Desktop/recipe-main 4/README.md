@@ -112,6 +112,9 @@ Add support for multiple languages in the interface.
 Provide more customization options for recipes (e.g., serving size, cuisine type).
 Improve ingredient detection using additional image processing libraries.
 
+## demo video link
+You can see the demonstration video at this link:https://youtu.be/Ljkb6k1YSG4 
+
 ## Tips
 We have added some filters in the script2 file. You can try to connect this file if you want to filter out some less accurate or standardized recognition results.
 
